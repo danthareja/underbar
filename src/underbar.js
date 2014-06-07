@@ -114,17 +114,29 @@ var _ = {};
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
-
   };
 
 
   // Return the results of applying an iterator to each element.
+
   _.map = function(collection, iterator) {
+    var mapped = [];
+
+    if (Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i++) {
+        mapped.push(iterator(collection[i], i, collection));
+      }
+    }else{
+      for (var key in collection) {
+        mapped.push(iterator(collection[key], key, collection));
+      }
+    }
+
+    return mapped;
+  };
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
-  };
-
   /*
    * TIP: map is really handy when you want to transform an array of
    * values into a new array of values. _.pluck() is solved for you
