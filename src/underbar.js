@@ -95,23 +95,26 @@ var _ = {};
     return passed;
   };
 
-  // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-    var rejected = [];
+    // var rejected = [];
 
-    _.each(collection, function(item) {
-      if (!test(item)) {
-        rejected.push(item);
-        }
-    });
+    // _.each(collection, function(item) {
+    //   if (!test(item)) {
+    //     rejected.push(item);
+    //     }
+    // });
 
-    return rejected;
+    // return rejected;
+
+    return _.filter(collection, function(n){ return !test(n) }); //not sure why this works...
+
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+
   };
 
 
