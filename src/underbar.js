@@ -109,15 +109,23 @@ var _ = {};
     // return rejected;
 
     return _.filter(collection, function(n){ return !test(n) }); //not sure why this works...
-
   };
 
-  // Produce a duplicate-free version of the array.
+  // Produce a duplicate-free version of the array. TODO: I think the logic is sound here. not sure why it's not working..
   _.uniq = function(array) {
+    var unique = [];
+
+    _.each(array, function(item) {
+      if (_.indexOf(unique, item) === -1) {
+        unique.push(item);
+      }
+    });
+
+    return unique;
   };
 
 
-  // Return the results of applying an iterator to each element.
+  // Return the results of applying an iterator to each element. TODO: refactor so it uses each
 
   _.map = function(collection, iterator) {
     var mapped = [];
