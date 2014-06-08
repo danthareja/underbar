@@ -98,20 +98,11 @@ var _ = {};
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-    // var rejected = [];
-
-    // _.each(collection, function(item) {
-    //   if (!test(item)) {
-    //     rejected.push(item);
-    //     }
-    // });
-
-    // return rejected;
 
     return _.filter(collection, function(n){ return !test(n) }); //not sure why this works...
   };
 
-  // Produce a duplicate-free version of the array. TODO: I think the logic is sound here. not sure why it's not working..
+  // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
     var unique = [];
 
@@ -121,24 +112,18 @@ var _ = {};
       }
     });
 
-    return unique;
+    return unique; //Don't forget to return your values..
   };
 
 
-  // Return the results of applying an iterator to each element. TODO: refactor so it uses each
+  // Return the results of applying an iterator to each element.
 
   _.map = function(collection, iterator) {
     var mapped = [];
 
-    if (Array.isArray(collection)) {
-      for (var i = 0; i < collection.length; i++) {
-        mapped.push(iterator(collection[i], i, collection));
-      }
-    }else{
-      for (var key in collection) {
-        mapped.push(iterator(collection[key], key, collection));
-      }
-    }
+    _.each(collection, function(item, index, collection) {
+      mapped.push(iterator(item, index, collection));
+    });
 
     return mapped;
   };
