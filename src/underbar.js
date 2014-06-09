@@ -151,6 +151,11 @@ var _ = {};
   // Calls the method named by methodName on each value in the list.
   // Note: you will nead to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
+    var isFunction = typeof functionOrKey === "function" ? true : false;
+
+    return _.map(collection, function(item) {
+      return (isFunction ? functionOrKey : item[functionOrKey]).apply(item, args);
+    });
   };
 
   // Reduces an array or object to a single value by repetitively calling
@@ -167,6 +172,7 @@ var _ = {};
   //     return total + number;
   //   }, 0); // should be 6
   _.reduce = function(collection, iterator, accumulator) {
+
   };
 
   // Determine if the array or object contains a given value (using `===`).
