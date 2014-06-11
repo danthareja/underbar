@@ -41,9 +41,9 @@ var _ = {};
   _.last = function(array, n) {
     if (n === undefined) {
       return array[array.length - 1];
-    }else if (n === 0) {
+    } else if (n === 0) {
       return [];
-    }else{
+    } else {
       return array.slice(-n);
     }
   };
@@ -58,7 +58,7 @@ var _ = {};
       for (var i = 0; i < collection.length; i++) {
         iterator(collection[i], i, collection);
       }
-    }else{
+    } else {
       for (var key in collection) {
         iterator(collection[key], key, collection);
       }
@@ -151,10 +151,12 @@ var _ = {};
   // Calls the method named by methodName on each value in the list.
   // Note: you will nead to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
-    var isFunction = typeof functionOrKey === "function" ? true : false;
-
     return _.map(collection, function(item) {
-      return (isFunction ? functionOrKey : item[functionOrKey]).apply(item, args);
+      if (typeof functionOrKey === "function") {
+        return functionOrKey.apply(item, args);
+      } else {
+        return item[functionOrKey].apply(item, args);
+      }
     });
   };
 
@@ -172,6 +174,7 @@ var _ = {};
   //     return total + number;
   //   }, 0); // should be 6
   _.reduce = function(collection, iterator, accumulator) {
+    if (accumulator === undefined) { accumulator = collection[0]};
 
   };
 
