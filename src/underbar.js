@@ -99,7 +99,7 @@ var _ = {};
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
 
-    return _.filter(collection, function(n){ return !test(n) }); //not sure why this works...
+    return _.filter(collection, function(item){ return !test(item) });
   };
 
   // Produce a duplicate-free version of the array.
@@ -157,7 +157,7 @@ var _ = {};
       } else {
         return item[functionOrKey].apply(item, args);
       }
-    });
+    }); 
   };
 
   // Reduces an array or object to a single value by repetitively calling
@@ -176,6 +176,11 @@ var _ = {};
   _.reduce = function(collection, iterator, accumulator) {
     if (accumulator === undefined) { accumulator = collection[0]};
 
+    _.each(collection, function(value) {
+      accumulator = iterator(accumulator, value);
+    });
+
+    return accumulator;
   };
 
   // Determine if the array or object contains a given value (using `===`).
