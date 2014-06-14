@@ -260,9 +260,7 @@ var _ = {};
     _.each(list, function(source) {
       if (source) {
         for (var prop in source) {
-          if (result.hasOwnProperty(prop) === false) {
-          result[prop] = source[prop];
-          }
+          if (result.hasOwnProperty(prop) === false) { result[prop] = source[prop] };
         }
       }
     });
@@ -309,7 +307,15 @@ var _ = {};
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
-  };
+    var results = {};
+
+    return function() {
+      if (!results.hasOwnProperty(arguments[0])) {
+        results[arguments[0]] = func.apply(this, arguments);  //keys are stored in variable, have to use bracket notation here
+      }
+        return results[arguments[0]];
+    }
+   };
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
